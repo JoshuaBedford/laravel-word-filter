@@ -1,0 +1,41 @@
+{
+    "name": "joshuabedford/laravel-word-filter",
+    "description": "A Vendor Package Example",
+    "keywords": [
+        "laravel",
+        "profanity",
+        "word",
+        "filter",
+        "validate",
+        "validation"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "require-dev": {
+        "laravel/laravel": "5.*",
+        "symfony/css-selector": "3.1.*",
+        "symfony/dom-crawler": "3.1.*",
+        "phpunit/phpunit": "^7.5",
+        "orchestra/testbench": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JoshuaBedford\\LaravelWordFilter\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JoshuaBedford\\LaravelWordFilter\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JoshuaBedford\\LaravelWordFilter\\Providers\\WordFilterServiceProvider"
+            ]
+        }
+    }
+}
