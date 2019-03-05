@@ -5,6 +5,7 @@ namespace JoshuaBedford\LaravelWordFilter\Providers;
 use JoshuaBedford\LaravelWordFilter\WordFilter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Collection;
 
 class WordFilterServiceProvider extends ServiceProvider
 {
