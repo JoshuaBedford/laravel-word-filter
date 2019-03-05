@@ -38,7 +38,7 @@ class WordFilterServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_word_list_tables.php.stub' => $this->getMigrationFileName($filesystem),
+            __DIR__.'/../../database/migrations/create_word_list_tables.php.stub' => $this->getMigrationFileName($filesystem),
         ], 'migrations');
 
         app('validator')->extend('word', function ($attribute, $value, $parameters, $validator) {
