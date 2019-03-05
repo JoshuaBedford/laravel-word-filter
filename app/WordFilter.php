@@ -66,7 +66,7 @@ class WordFilter
 
         $this->blacklist = array_map(function ($value) {
             return (array)$value;
-        }, $result);
+        }, $this->blacklist);
         
         // $this->blacklist = [
 
@@ -154,7 +154,7 @@ class WordFilter
 
         $this->whitelist = array_map(function ($value) {
             return (array)$value;
-        }, $result);
+        }, $this->whitelist);
 
         array_map(function ($value) {
     return (array)$value;
