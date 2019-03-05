@@ -62,7 +62,11 @@ class WordFilter
     {
         $table = $this->config['table_names']['blacklist'];
 
-        $this->blacklist = \DB::table($table)->select('word')->get()->toArray();
+        $value = \DB::table($table)->select('word')->get()->toArray();
+
+        $this->blacklist = array_map(function ($value) {
+            return (array)$value;
+        }, $result);
         
         // $this->blacklist = [
 
@@ -146,7 +150,15 @@ class WordFilter
     {
         $table = $this->config['table_names']['whitelist'];
 
-        $this->whitelist = \DB::table($table)->select('word')->get()->toArray();
+        $value = \DB::table($table)->select('word')->get()->toArray();
+
+        $this->whitelist = array_map(function ($value) {
+            return (array)$value;
+        }, $result);
+
+        array_map(function ($value) {
+    return (array)$value;
+}, $result);
         
         // $this->whitelist = [
 
