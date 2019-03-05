@@ -155,10 +155,6 @@ class WordFilter
         $this->whitelist = array_map(function ($value) {
             return (array)$value;
         }, $this->whitelist);
-
-        array_map(function ($value) {
-    return (array)$value;
-}, $result);
         
         // $this->whitelist = [
 
