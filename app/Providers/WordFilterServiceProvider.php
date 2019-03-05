@@ -4,6 +4,7 @@ namespace JoshuaBedford\LaravelWordFilter\Providers;
 
 use JoshuaBedford\LaravelWordFilter\WordFilter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Filesystem\Filesystem;
 
 class WordFilterServiceProvider extends ServiceProvider
 {
@@ -28,7 +29,7 @@ class WordFilterServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Filesystem $filesystem)
     {
 
         $this->publishes([
