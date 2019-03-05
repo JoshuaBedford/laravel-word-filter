@@ -62,7 +62,7 @@ class WordFilter
     {
         $table = $this->config['table_names']['blacklist'];
 
-        $this->blacklist = \DB::select('select word from ?', $table);
+        $this->blacklist = \DB::table($table)->select('word')->get();
         
         // $this->blacklist = [
 
@@ -146,7 +146,7 @@ class WordFilter
     {
         $table = $this->config['table_names']['whitelist'];
 
-        $this->whitelist = \DB::select('select word from ?', $table);
+        $this->whitelist = \DB::table($table)->select('word')->get();
         
         // $this->whitelist = [
 
