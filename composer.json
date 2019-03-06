@@ -1,6 +1,6 @@
 {
     "name": "joshuabedford/laravel-word-filter",
-    "description": "A Vendor Package Example",
+    "description": "A word and/or profanity filter for Laravel.",
     "keywords": [
         "laravel",
         "profanity",
@@ -9,8 +9,16 @@
         "validate",
         "validation"
     ],
+    "homepage": "https://github.com/JoshuaBedford/laravel-word-filter",
     "license": "MIT",
-    "type": "library",
+    "authors": [
+        {
+            "name": "Joshua Bedford",
+            "homepage": "https://joshuabedford.com",
+            "role": "Developer"
+        }
+    ],
+    "type": "project",
     "require": {
         "php": ">=5.5.9"
     },
@@ -23,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "JoshuaBedford\\LaravelWordFilter\\": "app/"
+            "JoshuaBedford\\LaravelWordFilter\\": "src/"
         }
     },
     "autoload-dev": {
@@ -34,8 +42,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "JoshuaBedford\\LaravelWordFilter\\Providers\\WordFilterServiceProvider"
+                "JoshuaBedford\\LaravelWordFilter\\WordFilterServiceProvider"
             ]
+        },
+        "branch-alias": {
+            "dev-master": "1.0-dev"
         }
     }
 }

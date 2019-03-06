@@ -1,6 +1,5 @@
 # Note: Not ready for public use.
 
-
 # Laravel Word Filter
 
 A package that once installs allows prohibited words to be filtered out or refused. Utilizes two database tables to hold a whitelist and blacklist of acceptable and prohibited words. Can be used with Laravel's Form [Validation](https://laravel.com/docs/5.6/validation) functionality (E.G. prevent certain usernames) to refuse certain inputs and require user correction.
@@ -17,7 +16,19 @@ composer require joshuabedford/laravel-word-filter
 php artisan vendor:publish
 ```
 
-You must run the migrations and place your default list of words in the database table.
+The command above will publish the appropriate files. Next, we have to install the database tables.
+
+```
+php artisan migrate
+```
+
+Now that the database tables are installed, we can seed them with data.
+
+```
+php artisan db:seed --class=JoshuaBedford\\LaravelWordFilter\\Database\\Seeds\\DatabaseSeeder
+```
+
+This should seed the database with our list of words that we consider necessary to blacklist or whitelist.
 
 # Usage
 
