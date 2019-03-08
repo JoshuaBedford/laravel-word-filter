@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
         	BlacklistSeeder::class,
-        	// WhitelistSeeder::class
+        	WhitelistSeeder::class
         ]);
     }
 }

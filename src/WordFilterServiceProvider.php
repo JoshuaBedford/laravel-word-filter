@@ -18,7 +18,7 @@ class WordFilterServiceProvider extends ServiceProvider
     public function boot(Filesystem $filesystem)
     {
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->publishes([
           realpath(__DIR__.'/../config/word.php') => config_path('word.php'),
@@ -46,22 +46,4 @@ class WordFilterServiceProvider extends ServiceProvider
         });
     }
 
-
-
-    /**
-     * Returns existing migration file if found, else uses the current timestamp.
-     *
-     * @param Filesystem $filesystem
-     * @return string
-     */
-    protected function getMigrationFileName(Filesystem $filesystem): string
-    {
-        $timestamp = date('Y_m_d_His');
-
-        return Collection::make($this->app->databasePath().DIRECTORY_SEPARATOR.'migrations'.DIRECTORY_SEPARATOR)
-            ->flatMap(function ($path) use ($filesystem) {
-                return $filesystem->glob($path.'*_create_word_list_tables.php');
-            })->push($this->app->databasePath()."/migrations/{$timestamp}_create_word_list_tables.php")
-            ->first();
-    }
 }
