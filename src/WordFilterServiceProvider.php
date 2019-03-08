@@ -18,7 +18,7 @@ class WordFilterServiceProvider extends ServiceProvider
     public function boot(Filesystem $filesystem)
     {
 
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         $this->publishes([
           realpath(__DIR__.'/../config/word.php') => config_path('word.php'),
