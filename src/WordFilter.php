@@ -169,35 +169,24 @@ class WordFilter
      */
     public function noProhibitedWords($string)
     {
-
         // Immediately, lets remove any whitelisted word from the string.
         $string = str_replace($this->whitelist, "", strtolower($string));
-
         $this->resetFiltered();
-
         if (!is_string($string) || !trim($string)) {
             return;
         }
-
-        // Let's start by assuming there is something wrong with the username.
-        $flag = false;
-
+        // Let's start by assuming there is nothing wrong with the username.
+        $flag = true;
         // Let's loop through the blacklist and search for each word.
         foreach ($this->blacklist as $badword) {
-
+            $badword = str_replace(" ", "", $badword);
             // Let's check to make sure there are no substrings of the bad word.
             if (stripos($string, $badword) !== false) {
-
                 // We found an occurrance of the bad word
                 $flag = false;
-
-            } else{
-                $flag = true;
-            }
-            if($flag){
-                return $flag;
             }
         }
+        return $flag;
     }
 
     // Here we will perform a regular expression search and replace using a callback.

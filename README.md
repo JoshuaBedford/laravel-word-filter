@@ -1,8 +1,10 @@
-# Note: Not ready for public use.
+# Note: NOT FULLY TESTED
+
+P.S. Yes, I am cringing my way through this one. No, I don't know what most of these words/phrases mean.
 
 # Laravel Word Filter
 
-A package that once installs allows prohibited words to be filtered out or refused. Utilizes two database tables to hold a whitelist and blacklist of acceptable and prohibited words. Can be used with Laravel's Form [Validation](https://laravel.com/docs/5.6/validation) functionality (E.G. prevent certain usernames) to refuse certain inputs and require user correction.
+A package that, once installed, allows prohibited words to be filtered out or refused. Works as standalone or with Laravel Validator. Utilizes two database tables to hold a whitelist and blacklist of acceptable and prohibited words. Can be used with Laravel's Form [Validation](https://laravel.com/docs/5.6/validation) functionality (E.G. prevent certain usernames) to refuse certain inputs and require user correction.
 
 # Installation
 
