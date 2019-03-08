@@ -62,83 +62,11 @@ class WordFilter
     {
         $table = $this->config['table_names']['blacklist'];
 
-        $value = \DB::table($table)->select('word')->get()->toArray();
+        $values = \DB::table($table)->select('word')->get()->toArray();
 
-        $this->blacklist = array_map(function ($value) {
-            return (array)$value;
-        }, $this->blacklist);
-        
-        // $this->blacklist = [
-
-        //     'anal',
-        //     'anus',
-        //     'arse',
-        //     'ass',
-        //     'ballsack',
-        //     'balls',
-        //     'bastard',
-        //     'bitch',
-        //     'biatch',
-        //     'bloody',
-        //     'blowjob',
-        //     'bollock',
-        //     'bollok',
-        //     'boner',
-        //     'boob',
-        //     'bugger',
-        //     'bum',
-        //     'butt',
-        //     'buttplug',
-        //     'clitoris',
-        //     'cock',
-        //     'coon',
-        //     'crap',
-        //     'cunt',
-        //     'damn',
-        //     'dick',
-        //     'dildo',
-        //     'dyke',
-        //     'fag',
-        //     'feck',
-        //     'fellate',
-        //     'fellatio',
-        //     'felching',
-        //     'fuck',
-        //     'fudgepacker',
-        //     'flange',
-        //     'goddamn',
-        //     'hell',
-        //     'homo',
-        //     'jizz',
-        //     'knobend',
-        //     'labia',
-        //     'muff',
-        //     'nigger',
-        //     'nigga',
-        //     'penis',
-        //     'piss',
-        //     'poop',
-        //     'prick',
-        //     'pube',
-        //     'pussy',
-        //     'queer',
-        //     'scrotum',
-        //     'sex',
-        //     'shit',
-        //     'sh1t',
-        //     'slut',
-        //     'smegma',
-        //     'spunk',
-        //     'suck',
-        //     'tit',
-        //     'tosser',
-        //     'turd',
-        //     'twat',
-        //     'vagina',
-        //     'wank',
-        //     'whore',
-        //     'wtf',
-        // ];
+        foreach($values as $value){
+            array_push($this->blacklist, $value->word);
+        }
 
         return $this;
     }
@@ -150,17 +78,11 @@ class WordFilter
     {
         $table = $this->config['table_names']['whitelist'];
 
-        $value = \DB::table($table)->select('word')->get()->toArray();
+        $values = \DB::table($table)->select('word')->get()->toArray();
 
-        $this->whitelist = array_map(function ($value) {
-            return (array)$value;
-        }, $this->whitelist);
-        
-        // $this->whitelist = [
-
-        //     'Cassandra'
-
-        // ];
+        foreach($values as $value){
+            array_push($this->whitelist, $value->word);
+        }
 
         return $this;
     }
@@ -247,31 +169,35 @@ class WordFilter
      */
     public function noProhibitedWords($string)
     {
+
+        // Immediately, lets remove any whitelisted word from the string.
+        $string = str_replace($this->whitelist, "", strtolower($string));
+
         $this->resetFiltered();
 
         if (!is_string($string) || !trim($string)) {
             return;
         }
 
+        // Let's start by assuming there is something wrong with the username.
+        $flag = false;
+
         // Let's loop through the blacklist and search for each word.
         foreach ($this->blacklist as $badword) {
 
-            // Let's check to make sure there are no substrings of the word.
+            // Let's check to make sure there are no substrings of the bad word.
             if (stripos($string, $badword) !== false) {
 
-                // We found an occurrance of the bad word, let's make
-                // sure its not on the whitelist.
-                foreach($this->whitelist as $goodword){
-                    if (stripos($string, $goodword) !== false) {
-                        return true; // the badword found was whitelisted.
-                    }
-                }
+                // We found an occurrance of the bad word
+                $flag = false;
 
-                return false;
+            } else{
+                $flag = true;
+            }
+            if($flag){
+                return $flag;
             }
         }
-
-        return true;
     }
 
     // Here we will perform a regular expression search and replace using a callback.

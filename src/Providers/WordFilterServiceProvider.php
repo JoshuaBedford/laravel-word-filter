@@ -9,6 +9,31 @@ use Illuminate\Support\Collection;
 
 class WordFilterServiceProvider extends ServiceProvider
 {
+
+    /**
+     * Register routes, translations, views and publishers.
+     *
+     * @return void
+     */
+    public function boot(Filesystem $filesystem)
+    {
+
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+
+        $this->publishes([
+          realpath(__DIR__.'/../../config/word.php') => config_path('word.php'),
+        ], 'config');
+
+        // $this->publishes([
+        //     __DIR__.'/../../database/migrations/create_word_list_tables.php.stub' => $this->getMigrationFileName($filesystem),
+        // ], 'migrations');
+
+        app('validator')->extend('username_word_filter', function ($attribute, $value, $parameters) {
+            return app('wordFilter')->noProhibitedWords($value);
+        }, "This username is not allowed.");
+    }
+
+
     /**
      * Register the service provider.
      *
@@ -22,27 +47,6 @@ class WordFilterServiceProvider extends ServiceProvider
 
             // Instantiate a word filter class.
             return new WordFilter(config('word'));
-        });
-    }
-
-    /**
-     * Register routes, translations, views and publishers.
-     *
-     * @return void
-     */
-    public function boot(Filesystem $filesystem)
-    {
-
-        $this->publishes([
-          realpath(__DIR__.'/../../config/word.php') => config_path('word.php'),
-        ], 'config');
-
-        $this->publishes([
-            __DIR__.'/../../database/migrations/create_word_list_tables.php.stub' => $this->getMigrationFileName($filesystem),
-        ], 'migrations');
-
-        app('validator')->extend('word', function ($attribute, $value, $parameters, $validator) {
-            return app('wordFilter')->noProhibitedWords($value);
         });
     }
 

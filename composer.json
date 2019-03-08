@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "JoshuaBedford\\LaravelWordFilter\\": "app/"
+            "JoshuaBedford\\LaravelWordFilter\\": "src/"
         }
     },
     "autoload-dev": {
